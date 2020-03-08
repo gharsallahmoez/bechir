@@ -28,9 +28,9 @@ public class UserDao<T> implements Dao<T> {
 	}
 
 	@Override
-	public Set getAll() {
+	public List<User> getAll() {
 		// TODO Auto-generated method stub
-		return (Set) users;
+		return users;
 	}
 
 	@Override

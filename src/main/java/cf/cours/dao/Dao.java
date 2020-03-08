@@ -1,6 +1,7 @@
 package cf.cours.dao;
 
 
+import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 
@@ -20,7 +21,7 @@ public interface Dao<T> {
      * Récupère tous les utilisateurs
      * @return Un Set de login
      */
-    Set<String> getAll();
+    List<User> getAll();
 
     /**
      * Crée un utilisateur et le sauvegarde

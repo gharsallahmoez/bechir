@@ -1,6 +1,9 @@
 package cf.cours.controller;
 
 
+import java.util.List;
+import java.util.Set;
+
 import javax.naming.AuthenticationException;
 
 import org.springframework.beans.factory.annotation.Autowired;
@@ -27,8 +30,8 @@ public class OperationController {
      * @return Une ResponseEntity avec le JWT dans le header "Authentication" si le login s'est bien passé, et le code de statut approprié (204, 401 ou 404).
      */
 	
-    @PostMapping("/login")
-    public void login(@RequestParam("login") String login,@RequestParam("password") String password) {
+	@GetMapping("/login")
+    public User login(@RequestParam("login") String login,@RequestParam("password") String password) {
 
     	User u =  dao.get(login);
     	try {
@@ -37,18 +40,26 @@ public class OperationController {
 			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-		u.isConnected();	
+		u.isConnected();
 		
+		return u;
     }
     
     @PostMapping("/register")
-    public void register(@RequestParam("login") String login,@RequestParam("password") String password) {
+    public String register(@RequestParam("login") String login,@RequestParam("password") String password) {
     	User u =  new User(login,password);
     	
 		dao.save(u);	
+		return "success";
 		
     }
-
+    @GetMapping("/users")
+    public List<User> users() {
+    	return dao.getAll();
+		
+    }
+    
+    
     /**
      * Réalise la déconnexion
      */
